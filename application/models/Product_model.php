@@ -13,10 +13,14 @@ class Product_model extends CI_Model{
         return $query;
     }
      
-    function save_product($product_name,$category_id,$subcategory_id,$product_price){
+    function save_product($product_name,$quantity,$category_id,$subcategory_id,$product_serves,$product_cooking,$product_preparation,$method){
         $data = array(
             'product_name' => $product_name,
-            'product_price' => $product_price,
+            'quantity' => $quantity,
+            'product_serves' => $product_serves,
+            'product_cooking' => $product_cooking,
+            'product_preparation' => $product_preparation,
+            'method' => $method,
             'product_category_id' => $category_id,
             'product_subcategory_id' => $subcategory_id
         );
@@ -24,7 +28,7 @@ class Product_model extends CI_Model{
     }
  
     function get_products(){
-        $this->db->select('product_id,product_name,product_price,category_name,subcategory_name');
+        $this->db->select('product_id,product_name,quantity,product_serves,product_cooking,product_preparation,category_name,subcategory_name,method');
         $this->db->from('product');
         $this->db->join('category','product_category_id = category_id','left');
         $this->db->join('sub_category','product_subcategory_id = subcategory_id','left'); 
@@ -37,9 +41,13 @@ class Product_model extends CI_Model{
         return $query;
     }
  
-    function update_product($product_id,$product_name,$category_id,$subcategory_id,$product_price){
+    function update_product($product_id,$product_name,$quantity,$category_id,$subcategory_id,$product_serves,$product_cooking,$product_preparation,$method){
         $this->db->set('product_name', $product_name);
-        $this->db->set('product_price', $product_price);
+        $this->db->set('quantity', $quantity);
+        $this->db->set('product_serves', $product_serves);
+        $this->db->set('product_cooking', $product_cooking);
+        $this->db->set('product_preparation', $product_preparation);
+        $this->db->set('method', $method);
         $this->db->set('product_category_id', $category_id);
         $this->db->set('product_subcategory_id', $subcategory_id);
         $this->db->where('product_id', $product_id);

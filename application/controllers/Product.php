@@ -29,10 +29,14 @@ class Product extends CI_Controller {
     //save product to database
     function save_product(){
         $product_name   = $this->input->post('product_name',TRUE);
+        $quantity  = $this->input->post('quantity',TRUE);
         $category_id    = $this->input->post('category',TRUE);
-        $subcategory_id = $this->input->post('sub_category',TRUE);
-        $product_price  = $this->input->post('product_price',TRUE);
-        $this->product_model->save_product($product_name,$category_id,$subcategory_id,$product_price);
+        $subcategory_id = $this->input->post('sub_category',TRUE);        
+        $product_serves  = $this->input->post('product_serves',TRUE);
+        $product_cooking  = $this->input->post('product_cooking',TRUE);
+        $product_preparation  = $this->input->post('product_preparation',TRUE);
+        $method  = $this->input->post('method',TRUE);
+        $this->product_model->save_product($product_name,$quantity,$category_id,$subcategory_id,$product_serves,$product_cooking,$product_preparation,$method);
         $this->session->set_flashdata('msg','<div class="alert alert-success">Product Saved</div>');
         redirect('product');
     }
@@ -59,10 +63,14 @@ class Product extends CI_Controller {
     function update_product(){
         $product_id     = $this->input->post('product_id',TRUE);
         $product_name   = $this->input->post('product_name',TRUE);
+        $quantity  = $this->input->post('quantity',TRUE);
         $category_id    = $this->input->post('category',TRUE);
         $subcategory_id = $this->input->post('sub_category',TRUE);
-        $product_price  = $this->input->post('product_price',TRUE);
-        $this->product_model->update_product($product_id,$product_name,$category_id,$subcategory_id,$product_price);
+        $product_serves  = $this->input->post('product_serves',TRUE);
+        $product_cooking  = $this->input->post('product_cooking',TRUE);
+        $product_preparation  = $this->input->post('product_preparation',TRUE);
+        $method  = $this->input->post('method',TRUE);
+        $this->product_model->update_product($product_id,$product_name,$quantity,$category_id,$subcategory_id,$product_serves,$product_cooking,$product_preparation,$method);
         $this->session->set_flashdata('msg','<div class="alert alert-success">Product Updated</div>');
         redirect('product');
     }
